@@ -42,4 +42,86 @@ public class FoodDaoImpl implements FoodDao {
 		return list;
 	}
 
+	@Override
+	public int saveFood(Food food) {
+		int result =0;
+		String sql="insert into food values(null,?,?,?,?)";
+		try {
+			con=DBUtil.getConnection();
+			pst=con.prepareStatement(sql);
+			pst.setString(1, food.getFoodName());
+			pst.setString(2, food.getFoodExplain());
+			pst.setDouble(3, food.getFoodPrice());
+			pst.setInt(4, food.getBusinessId());
+			result=pst.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(null, pst, con);
+		}
+		return result;
+	}
+
+	@Override
+	public int updateFood(Food food) {
+		int result=0;
+		String sql="update food set foodName=?,foodExplain=?,foodPrice=? where foodId=?";
+		try {
+			con=DBUtil.getConnection();
+			pst=con.prepareStatement(sql);
+			pst.setString(1, food.getFoodName());
+			pst.setString(2, food.getFoodExplain());
+			pst.setDouble(3, food.getFoodPrice());
+			pst.setInt(4, food.getFoodId());
+			result=pst.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(null, pst, con);
+		}
+		return result;
+	}
+
+	@Override
+	public Food getFoodById(Integer foodId) {
+		Food food = null;
+		String sql="select * from food where foodId=? ";
+		try {
+			con=DBUtil.getConnection();
+			pst=con.prepareStatement(sql);
+			pst.setInt(1, foodId);
+			rs=pst.executeQuery();
+			if(rs.next()) {
+				food=new Food();
+				food.setBusinessId(rs.getInt("businessId"));
+				food.setFoodExplain(rs.getString("foodExplain"));
+				food.setFoodPrice(rs.getDouble("foodPrice"));
+				food.setFoodName(rs.getString("foodName"));
+				food.setFoodId(rs.getInt("foodId"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(rs, pst, con);
+		}
+		return food;
+	}
+
+	@Override
+	public int removeFood(Integer foodId) {
+		int result=0;
+		String sql="delete from food where foodId=?";
+		try {
+			con=DBUtil.getConnection();
+			pst=con.prepareStatement(sql);
+			pst.setInt(1, foodId);
+			result=pst.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(null, pst, con);
+		}
+		return result;
+	}
+
 }
