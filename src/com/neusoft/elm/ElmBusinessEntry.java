@@ -25,8 +25,10 @@ public class ElmBusinessEntry {
 	    			businessView.showBusiness(business.getBusinessId());
 	    			break;
 	    		case 2:
+	    			businessView.editBusiness(business.getBusinessId());
 	    			break;
 	    		case 3:
+	    			businessView.changePassword(business.getBusinessId());
 	    			break;
 	    		case 4:
 	    			break;

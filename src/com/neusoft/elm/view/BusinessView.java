@@ -9,4 +9,6 @@ public interface BusinessView {
 	public void removeBusiness();
 	public Business login();
 	public void showBusiness(Integer businessId);
+	public void editBusiness(Integer businessId);
+	public void changePassword(Integer businessId);
 }
