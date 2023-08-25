@@ -34,10 +34,10 @@ public class ElmAdminEntry {
 					businessView.listBusiness();
 					break;
 				case 3:
-					// 执行选项3的逻辑
+					businessView.saveBusiness();
 					break;
 				case 4:
-					// 执行选项4的逻辑
+					businessView.removeBusiness();
 					break;
 				case 5:
 					System.out.println("\n=======欢迎下次光临=======");
