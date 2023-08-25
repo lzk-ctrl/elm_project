@@ -42,8 +42,8 @@ public class Business {
 		return businessAddress;
 	}
 
-	public void setBusinessAddress(String businessAddress) {
-		this.businessAddress = businessAddress;
+	public void setBusinessAddress(String string) {
+		this.businessAddress = string;
 	}
 
 	public String getBusinessExplain() {

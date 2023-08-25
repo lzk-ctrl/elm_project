@@ -64,19 +64,35 @@ public class BusinessViewImpl implements BusinessView {
 
 	public void removeBusiness() {
 		System.out.println("请输入商家编号：");
-		int businessId=input.nextInt();
+		int businessId = input.nextInt();
 		BusinessDao dao = new BusinessDaoImpl();
 		System.out.println("确认要删除吗(y/n)：");
-		if(input.next().equals("y")) {
-			int result= dao.removeBusiness(businessId);
-			if(result==1) {
+		if (input.next().equals("y")) {
+			int result = dao.removeBusiness(businessId);
+			if (result == 1) {
 				System.out.println("删除商家成功！");
-			}else {
+			} else {
 				System.out.println("删除商家失败！");
 			}
-		}else {
+		} else {
 			System.out.println("删除商家失败！");
 		}
+	}
+
+	@Override
+	public Business login() {
+		System.out.println("请输入商家编号：");
+		int businessId = input.nextInt();
+		System.out.println("请输入密码：");
+		String password = input.next();
+		BusinessDao dao = new BusinessDaoImpl();
+		return dao.getBusinessByIdByPass(businessId, password);
+	}
+
+	public void showBusiness(Integer businessId) {
+		BusinessDao dao = new BusinessDaoImpl();
+		Business business = dao.getBusinessById(businessId);
+		System.out.println(business);
 	}
 
 }
