@@ -14,7 +14,7 @@ public class BusinessViewImpl implements BusinessView {
 	public void listBusinessAll() {
 		BusinessDao dao = new BusinessDaoImpl();
 		List<Business> list = dao.listBusiness(null, null);
-		System.out.println("ÉÌ¼Ò±àºÅ\tÉÌ¼ÒÃû³Æ\tÉÌ¼ÒµØÖ·\tÉÌ¼Ò½éÉÜ\tÆğËÍ·Ñ\tÅäËÍ·Ñ");
+		System.out.println("å•†å®¶ç¼–å·\tå•†å®¶åç§°\tå•†å®¶åœ°å€\tå•†å®¶ä»‹ç»\tèµ·é€è´¹\té…é€è´¹");
 		for (Business b : list) {
 			System.out.println(b.getBusinessId() + "\t" + b.getBusinessName() + "\t" + b.getBusinessAddress() + "\t"
 					+ b.getBusinessExplain() + "\t" + b.getStarPrice() + "\t" + b.getDeliveryPrice());
@@ -27,22 +27,22 @@ public class BusinessViewImpl implements BusinessView {
 		String inputStr = "";
 		String businessName = "";
 		String businessAddress = "";
-		System.out.println("ÊÇ·ñĞèÒªÊäÈëÉÌ¼ÒÃû³Æ¹Ø¼ü´Ê(y/n)£º");
+		System.out.println("æ˜¯å¦éœ€è¦è¾“å…¥å•†å®¶åç§°å…³é”®è¯(y/n)ï¼š");
 		inputStr = input.next();
 		if (inputStr.equals("y")) {
-			System.out.println("ÇëÊäÈëÉÌ¼ÒÃû³Æ¹Ø¼ü´Ê£º");
+			System.out.println("è¯·è¾“å…¥å•†å®¶åç§°å…³é”®è¯ï¼š");
 			businessName = input.next();
 		}
 
-		System.out.println("ÊÇ·ñĞèÒªÊäÈëÉÌ¼ÒµØÖ·¹Ø¼ü´Ê(y/n)£º");
+		System.out.println("æ˜¯å¦éœ€è¦è¾“å…¥å•†å®¶åœ°å€å…³é”®è¯(y/n)ï¼š");
 		inputStr = input.next();
 		if (inputStr.equals("y")) {
-			System.out.println("ÇëÊäÈëÉÌ¼ÒµØÖ·¹Ø¼ü´Ê£º");
+			System.out.println("è¯·è¾“å…¥å•†å®¶åœ°å€å…³é”®è¯ï¼š");
 			businessAddress = input.next();
 		}
 
 		List<Business> list = dao.listBusiness(businessName, businessAddress);
-		System.out.println("ÉÌ¼Ò±àºÅ\tÉÌ¼ÒÃû³Æ\tÉÌ¼ÒµØÖ·\tÉÌ¼Ò½éÉÜ\tÆğËÍ·Ñ\tÅäËÍ·Ñ");
+		System.out.println("å•†å®¶ç¼–å·\tå•†å®¶åç§°\tå•†å®¶åœ°å€\tå•†å®¶ä»‹ç»\tèµ·é€è´¹\té…é€è´¹");
 		for (Business b : list) {
 			System.out.println(b.getBusinessId() + "\t" + b.getBusinessName() + "\t" + b.getBusinessAddress() + "\t"
 					+ b.getBusinessExplain() + "\t" + b.getStarPrice() + "\t" + b.getDeliveryPrice());
@@ -51,39 +51,39 @@ public class BusinessViewImpl implements BusinessView {
 
 	@Override
 	public void saveBusiness() {
-		System.out.println("ÇëÊäÈëÉÌ¼ÒÃû³Æ£º");
+		System.out.println("è¯·è¾“å…¥å•†å®¶åç§°ï¼š");
 		String businessName = input.next();
 		BusinessDao dao = new BusinessDaoImpl();
 		int businessId = dao.saveBusiness(businessName);
 		if (businessId > 0) {
-			System.out.println("ĞÂ½¨ÉÌ¼Ò³É¹¦£¡ÉÌ¼Ò±àºÅÎª£º" + businessId);
+			System.out.println("æ–°å»ºå•†å®¶æˆåŠŸï¼å•†å®¶ç¼–å·ä¸ºï¼š" + businessId);
 		} else {
-			System.out.println("ĞÂ½¨ÉÌ¼ÒÊ§°Ü£¡");
+			System.out.println("æ–°å»ºå•†å®¶å¤±è´¥ï¼");
 		}
 	}
 
 	public void removeBusiness() {
-		System.out.println("ÇëÊäÈëÉÌ¼Ò±àºÅ£º");
+		System.out.println("è¯·è¾“å…¥å•†å®¶ç¼–å·ï¼š");
 		int businessId = input.nextInt();
 		BusinessDao dao = new BusinessDaoImpl();
-		System.out.println("È·ÈÏÒªÉ¾³ıÂğ(y/n)£º");
+		System.out.println("ç¡®è®¤è¦åˆ é™¤å—(y/n)ï¼š");
 		if (input.next().equals("y")) {
 			int result = dao.removeBusiness(businessId);
 			if (result == 1) {
-				System.out.println("É¾³ıÉÌ¼Ò³É¹¦£¡");
+				System.out.println("åˆ é™¤å•†å®¶æˆåŠŸï¼");
 			} else {
-				System.out.println("É¾³ıÉÌ¼ÒÊ§°Ü£¡");
+				System.out.println("åˆ é™¤å•†å®¶å¤±è´¥ï¼");
 			}
 		} else {
-			System.out.println("É¾³ıÉÌ¼ÒÊ§°Ü£¡");
+			System.out.println("åˆ é™¤å•†å®¶å¤±è´¥ï¼");
 		}
 	}
 
 	@Override
 	public Business login() {
-		System.out.println("ÇëÊäÈëÉÌ¼Ò±àºÅ£º");
+		System.out.println("è¯·è¾“å…¥å•†å®¶ç¼–å·ï¼š");
 		int businessId = input.nextInt();
-		System.out.println("ÇëÊäÈëÃÜÂë£º");
+		System.out.println("è¯·è¾“å…¥å¯†ç ï¼š");
 		String password = input.next();
 		BusinessDao dao = new BusinessDaoImpl();
 		return dao.getBusinessByIdByPass(businessId, password);
@@ -97,52 +97,52 @@ public class BusinessViewImpl implements BusinessView {
 
 	@Override
 	public void editBusiness(Integer businessId) {
-		// ÏÈ½«ÉÌ¼ÒĞÅÏ¢²éÑ¯³öÀ´ÏÔÊ¾£¬È»ºóÓÃ»§²ÅÄÜ¸üĞÂ
+		// å…ˆå°†å•†å®¶ä¿¡æ¯æŸ¥è¯¢å‡ºæ¥æ˜¾ç¤ºï¼Œç„¶åç”¨æˆ·æ‰èƒ½æ›´æ–°
 		BusinessDao dao = new BusinessDaoImpl();
 		Business business = dao.getBusinessById(businessId);
 		System.out.println(business);
 
 		String inputStr = "";
-		System.out.println("ÊÇ·ñĞŞ¸ÄÉÌ¼ÒÃû³Æ(y/n)£º");
+		System.out.println("æ˜¯å¦ä¿®æ”¹å•†å®¶åç§°(y/n)ï¼š");
 		inputStr = input.next();
 		if (inputStr.equals("y")) {
-			System.out.println("ÇëÊäÈëĞÂµÄÉÌ¼ÒÃû³Æ£º");
+			System.out.println("è¯·è¾“å…¥æ–°çš„å•†å®¶åç§°ï¼š");
 			business.setBusinessName(input.next());
 		}
 
-		System.out.println("ÊÇ·ñĞŞ¸ÄÉÌ¼ÒµØÖ·(y/n)£º");
+		System.out.println("æ˜¯å¦ä¿®æ”¹å•†å®¶åœ°å€(y/n)ï¼š");
 		inputStr = input.next();
 		if (inputStr.equals("y")) {
-			System.out.println("ÇëÊäÈëĞÂµÄÉÌ¼ÒµØÖ·£º");
+			System.out.println("è¯·è¾“å…¥æ–°çš„å•†å®¶åœ°å€ï¼š");
 			business.setBusinessAddress(input.next());
 		}
 
-		System.out.println("ÊÇ·ñĞŞ¸ÄÉÌ¼Ò½éÉÜ(y/n)£º");
+		System.out.println("æ˜¯å¦ä¿®æ”¹å•†å®¶ä»‹ç»(y/n)ï¼š");
 		inputStr = input.next();
 		if (inputStr.equals("y")) {
-			System.out.println("ÇëÊäÈëĞÂµÄÉÌ¼Ò½éÉÜ£º");
+			System.out.println("è¯·è¾“å…¥æ–°çš„å•†å®¶ä»‹ç»ï¼š");
 			business.setBusinessExplain(input.next());
 		}
 
-		System.out.println("ÊÇ·ñĞŞ¸ÄÆğËÍ·Ñ(y/n)£º");
+		System.out.println("æ˜¯å¦ä¿®æ”¹èµ·é€è´¹(y/n)ï¼š");
 		inputStr = input.next();
 		if (inputStr.equals("y")) {
-			System.out.println("ÇëÊäÈëĞÂµÄÆğËÍ·Ñ£º");
+			System.out.println("è¯·è¾“å…¥æ–°çš„èµ·é€è´¹ï¼š");
 			business.setStarPrice(input.nextDouble());
 		}
 
-		System.out.println("ÊÇ·ñĞŞ¸ÄÅäËÍ·Ñ(y/n)£º");
+		System.out.println("æ˜¯å¦ä¿®æ”¹é…é€è´¹(y/n)ï¼š");
 		inputStr = input.next();
 		if (inputStr.equals("y")) {
-			System.out.println("ÇëÊäÈëĞÂµÄÅäËÍ·Ñ£º");
+			System.out.println("è¯·è¾“å…¥æ–°çš„é…é€è´¹ï¼š");
 			business.setDeliveryPrice(input.nextDouble());
 		}
 
 		int result = dao.updateBusiness(business);
 		if (result > 0) {
-			System.out.println("\nĞŞ¸ÄÉÌ¼ÒĞÅÏ¢³É¹¦£¡\n");
+			System.out.println("\nä¿®æ”¹å•†å®¶ä¿¡æ¯æˆåŠŸï¼\n");
 		} else {
-			System.out.println("\nĞŞ¸ÄÉÌ¼ÒĞÅÏ¢Ê§°Ü£¡\n");
+			System.out.println("\nä¿®æ”¹å•†å®¶ä¿¡æ¯å¤±è´¥ï¼\n");
 		}
 	}
 
@@ -150,28 +150,28 @@ public class BusinessViewImpl implements BusinessView {
 	public void changePassword(Integer businessId) {
 		BusinessDao dao = new BusinessDaoImpl();
 		Business business = dao.getBusinessById(businessId);
-		System.out.println("\nÇëÊäÈë¾ÉÃÜÂë£º");
+		System.out.println("\nè¯·è¾“å…¥æ—§å¯†ç ï¼š");
 		String oldPass = input.next();
 		while (!oldPass.equals(business.getPassword())) {
-			System.out.println("\nÃÜÂë´íÎó!!!ÇëÖØĞÂÊäÈë£º");
+			System.out.println("\nå¯†ç é”™è¯¯!!!è¯·é‡æ–°è¾“å…¥ï¼š");
 			oldPass = input.next();
 		}
-		System.out.println("\nÇëÊäÈëĞÂÃÜÂë£º");
+		System.out.println("\nè¯·è¾“å…¥æ–°å¯†ç ï¼š");
 		String password = input.next();
-		System.out.println("\nÇëÔÙ´ÎÊäÈëĞÂÃÜÂë£º");
+		System.out.println("\nè¯·å†æ¬¡è¾“å…¥æ–°å¯†ç ï¼š");
 		String beginPassword = input.next();
 		while (!password.equals(beginPassword)) {
-			System.out.println("Á½´ÎÊäÈëÃÜÂë²»Ò»ÖÂ!!!ÇëÖØÊÔ£º");
-			System.out.println("\nÇëÊäÈëĞÂÃÜÂë£º");
+			System.out.println("ä¸¤æ¬¡è¾“å…¥å¯†ç ä¸ä¸€è‡´!!!è¯·é‡è¯•ï¼š");
+			System.out.println("\nè¯·è¾“å…¥æ–°å¯†ç ï¼š");
 			password = input.next();
-			System.out.println("\nÇëÔÙ´ÎÊäÈëĞÂÃÜÂë£º");
+			System.out.println("\nè¯·å†æ¬¡è¾“å…¥æ–°å¯†ç ï¼š");
 			beginPassword = input.next();
 		}
 		int result = dao.changepassword(businessId, beginPassword);
 		if (result > 0) {
-			System.out.println("\nĞŞ¸ÄÃÜÂë³É¹¦£¡");
+			System.out.println("\nä¿®æ”¹å¯†ç æˆåŠŸï¼");
 		} else {
-			System.out.println("\nĞŞ¸ÄÃÜÂëÊ§°Ü£¡");
+			System.out.println("\nä¿®æ”¹å¯†ç å¤±è´¥ï¼");
 		}
 	}
 

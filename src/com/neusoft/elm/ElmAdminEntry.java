@@ -13,7 +13,7 @@ public class ElmAdminEntry {
 	public void work() {
 
 		System.out.println("-----------------------------------------------------------------");
-		System.out.println("|\t\t\t ¶öÁËÃ´ºóÌ¨¹ÜÀíÏµÍ³ \t\t\t|");
+		System.out.println("|\t\t\t é¥¿äº†ä¹ˆåå°ç®¡ç†ç³»ç»Ÿ \t\t\t|");
 		System.out.println("-----------------------------------------------------------------");
 		AdminView adminView = new AdminViewImpl();
 		BusinessView businessView = new BusinessViewImpl();
@@ -23,8 +23,8 @@ public class ElmAdminEntry {
 		if (admin != null) {
 			int menu = 0;
 			while (menu != 5) {
-				System.out.println("\n=======1.ËùÓĞÉÌ¼ÒÁĞ±í=2.ËÑË÷ÉÌ¼Ò=3.ĞÂ½¨ÉÌ¼Ò=4.É¾³ıÉÌ¼Ò=5.ÍË³öÏµÍ³=======");
-				System.out.println("ÇëÊäÈëÄãµÄÑ¡Ôñ£º");
+				System.out.println("\n=======1.æ‰€æœ‰å•†å®¶åˆ—è¡¨=2.æœç´¢å•†å®¶=3.æ–°å»ºå•†å®¶=4.åˆ é™¤å•†å®¶=5.é€€å‡ºç³»ç»Ÿ=======");
+				System.out.println("è¯·è¾“å…¥ä½ çš„é€‰æ‹©ï¼š");
 				menu = input.nextInt();
 				switch (menu) {
 				case 1:
@@ -40,17 +40,17 @@ public class ElmAdminEntry {
 					businessView.removeBusiness();
 					break;
 				case 5:
-					System.out.println("\n=======»¶Ó­ÏÂ´Î¹âÁÙ=======");
+					System.out.println("\n=======æ¬¢è¿ä¸‹æ¬¡å…‰ä¸´=======");
 					break;
 				default:
-					System.out.println("\n=======Ã»ÓĞÕâ¸öÑ¡Ïî=======");
+					System.out.println("\n=======æ²¡æœ‰è¿™ä¸ªé€‰é¡¹=======");
 					break;
 				}
 			}
 		} else {
-			System.out.println("\n¹ÜÀíÔ±Ãû³Æ»òÃÜÂëÊäÈë´íÎó!\n");
+			System.out.println("\nç®¡ç†å‘˜åç§°æˆ–å¯†ç è¾“å…¥é”™è¯¯!\n");
 		}
-		input.close(); // ¹Ø±ÕScannerÒÔÊÍ·Å×ÊÔ´
+		input.close(); // å…³é—­Scannerä»¥é‡Šæ”¾èµ„æº
 	}
 
 	public static void main(String[] args) {

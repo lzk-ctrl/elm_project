@@ -12,9 +12,9 @@ public class AdminViewImpl implements AdminView {
 
 	public Admin login() {
 
-		System.out.println("ÇëÊäÈë¹ÜÀíÔ±Ãû³Æ£º");
+		System.out.println("è¯·è¾“å…¥ç®¡ç†å‘˜åç§°ï¼š");
 		String adminName = input.next();
-		System.out.println("ÇëÊäÈëÃÜÂë£º");
+		System.out.println("è¯·è¾“å…¥å¯†ç ï¼š");
 		String password = input.next();
 
 		AdminDao dao = new AdminDaoImpl();

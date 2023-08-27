@@ -8,8 +8,8 @@ public class Food {
 	private Integer businessId;
 
 	public String toString() {
-		return "\nʳƷ��ţ�" + this.foodId + "\nʳƷ���ƣ�" + this.foodName + "\nʳƷ���ܣ�" + this.foodExplain + "\nʳƷ�۸�"
-				+ this.foodPrice + "\n�����̼ң�" + this.businessId;
+		return "\n食品编号：" + this.foodId + "\n食品名称：" + this.foodName + "\n食品介绍：" + this.foodExplain + "\n食品价格："
+				+ this.foodPrice + "\n所属商家：" + this.businessId;
 	}
 
 	public Integer getFoodId() {

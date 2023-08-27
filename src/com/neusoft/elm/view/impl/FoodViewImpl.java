@@ -14,7 +14,7 @@ public class FoodViewImpl implements FoodView {
 	public List<Food> showFoodList(Integer businessId) {
 		FoodDao dao = new FoodDaoImpl();
 		List<Food> list = dao.listFoodByBusinessId(businessId);
-		System.out.println("Ê³Æ·±àºÅ\tÊ³Æ·Ãû³Æ\tÊ³Æ·½éÉÜ\tÊ³Æ·¼Û¸ñ");
+		System.out.println("é£Ÿå“ç¼–å·\té£Ÿå“åç§°\té£Ÿå“ä»‹ç»\té£Ÿå“ä»·æ ¼");
 		for (Food food : list) {
 			System.out.println(food.getFoodId() + "\t" + food.getFoodName() + "\t" + food.getFoodExplain() + "\t"
 					+ food.getFoodPrice());
@@ -25,19 +25,19 @@ public class FoodViewImpl implements FoodView {
 	@Override
 	public void saveFood(Integer businessId) {
 		Food food = new Food();
-		System.out.println("ÇëÊäÈëÊ³Æ·Ãû³Æ£º");
+		System.out.println("è¯·è¾“å…¥é£Ÿå“åç§°ï¼š");
 		food.setFoodName(input.next());
-		System.out.println("ÇëÊäÈëÊ³Æ·½éÉÜ£º");
+		System.out.println("è¯·è¾“å…¥é£Ÿå“ä»‹ç»ï¼š");
 		food.setFoodExplain(input.next());
-		System.out.println("ÇëÊäÈëÊ³Æ·¼Û¸ñ£º");
+		System.out.println("è¯·è¾“å…¥é£Ÿå“ä»·æ ¼ï¼š");
 		food.setFoodPrice(input.nextDouble());
 		food.setBusinessId(businessId);
 		FoodDao dao = new FoodDaoImpl();
 		int result = dao.saveFood(food);
 		if (result > 0) {
-			System.out.println("\nĞÂÔöÊ³Æ·³É¹¦£¡\n");
+			System.out.println("\næ–°å¢é£Ÿå“æˆåŠŸï¼\n");
 		} else {
-			System.out.println("\nĞÂÔöÊ³Æ·Ê§°Ü£¡\n");
+			System.out.println("\næ–°å¢é£Ÿå“å¤±è´¥ï¼\n");
 		}
 
 	}
@@ -47,40 +47,40 @@ public class FoodViewImpl implements FoodView {
 		FoodDao dao = new FoodDaoImpl();
 		List<Food> list = showFoodList(businessId);
 		if (list.size() == 0) {
-			System.out.println("Ã»ÓĞÈÎºÎÊ³Æ·!!!");
+			System.out.println("æ²¡æœ‰ä»»ä½•é£Ÿå“!!!");
 			return;
 		}
-		System.out.println("ÇëÑ¡ÔñÒª¸üĞÂµÄÊ³Æ·±àºÅ£º");
+		System.out.println("è¯·é€‰æ‹©è¦æ›´æ–°çš„é£Ÿå“ç¼–å·ï¼š");
 		int foodId = input.nextInt();
 		Food food = dao.getFoodById(foodId);
 		System.out.println(food);
 
 		String inputStr = "";
-		System.out.println("ÊÇ·ñ¸üĞÂÊ³Æ·Ãû³Æ(y/n)£º");
+		System.out.println("æ˜¯å¦æ›´æ–°é£Ÿå“åç§°(y/n)ï¼š");
 		inputStr = input.next();
 		if (inputStr.equals("y")) {
-			System.out.println("ÇëÊäÈëĞÂµÄÊ³Æ·Ãû³Æ£º");
+			System.out.println("è¯·è¾“å…¥æ–°çš„é£Ÿå“åç§°ï¼š");
 			food.setFoodName(input.next());
 		}
 
-		System.out.println("ÊÇ·ñ¸üĞÂÊ³Æ·½éÉÜ(y/n)£º");
+		System.out.println("æ˜¯å¦æ›´æ–°é£Ÿå“ä»‹ç»(y/n)ï¼š");
 		inputStr = input.next();
 		if (inputStr.equals("y")) {
-			System.out.println("ÇëÊäÈëĞÂµÄÊ³Æ·½éÉÜ£º");
+			System.out.println("è¯·è¾“å…¥æ–°çš„é£Ÿå“ä»‹ç»ï¼š");
 			food.setFoodExplain(input.next());
 		}
 
-		System.out.println("ÊÇ·ñ¸üĞÂÊ³Æ·¼Û¸ñ(y/n)£º");
+		System.out.println("æ˜¯å¦æ›´æ–°é£Ÿå“ä»·æ ¼(y/n)ï¼š");
 		inputStr = input.next();
 		if (inputStr.equals("y")) {
-			System.out.println("ÇëÊäÈëĞÂµÄÊ³Æ·¼Û¸ñ£º");
+			System.out.println("è¯·è¾“å…¥æ–°çš„é£Ÿå“ä»·æ ¼ï¼š");
 			food.setFoodPrice(input.nextDouble());
 		}
 		int result = dao.updateFood(food);
 		if (result > 0) {
-			System.out.println("\nĞŞ¸ÄÊ³Æ·³É¹¦£¡\n");
+			System.out.println("\nä¿®æ”¹é£Ÿå“æˆåŠŸï¼\n");
 		} else {
-			System.out.println("\nĞŞ¸ÄÊ³Æ·Ê§°Ü£¡\n");
+			System.out.println("\nä¿®æ”¹é£Ÿå“å¤±è´¥ï¼\n");
 		}
 
 	}
@@ -90,19 +90,19 @@ public class FoodViewImpl implements FoodView {
 		FoodDao dao = new FoodDaoImpl();
 		List<Food> list = showFoodList(businessId);
 		if (list.size() == 0) {
-			System.out.println("Ã»ÓĞÈÎºÎÊ³Æ·£¡");
+			System.out.println("æ²¡æœ‰ä»»ä½•é£Ÿå“ï¼");
 			return;
 		}
-		System.out.println("ÇëÑ¡ÔñÒªÉ¾³ıµÄÊ³Æ·±àºÅ£º");
+		System.out.println("è¯·é€‰æ‹©è¦åˆ é™¤çš„é£Ÿå“ç¼–å·ï¼š");
 		int foodId = input.nextInt();
 
-		System.out.println("È·ÈÏÒªÉ¾³ıÂğ(y/n)£º");
+		System.out.println("ç¡®è®¤è¦åˆ é™¤å—(y/n)ï¼š");
 		if (input.next().equals("y")) {
 			int result = dao.removeFood(foodId);
 			if (result > 0) {
-				System.out.println("\nÉ¾³ıÊ³Æ·³É¹¦£¡\n");
+				System.out.println("\nåˆ é™¤é£Ÿå“æˆåŠŸï¼\n");
 			} else {
-				System.out.println("\nÉ¾³ıÊ³Æ·Ê§°Ü£¡\n");
+				System.out.println("\nåˆ é™¤é£Ÿå“å¤±è´¥ï¼\n");
 				return;
 			}
 		}
