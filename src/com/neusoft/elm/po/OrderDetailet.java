@@ -37,4 +37,12 @@ public class OrderDetailet {
 	private Integer orderId;
 	private Integer foodId;
 	private Integer quantity;
+	private Food food;
+	public Food getFood() {
+		return food;
+	}
+
+	public void setFood(Food food) {
+		this.food = food;
+	}
 }
