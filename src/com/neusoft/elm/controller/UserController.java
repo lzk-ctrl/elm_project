@@ -1,6 +1,8 @@
 package com.neusoft.elm.controller;
 
 import java.util.List;
+
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import com.neusoft.elm.po.User;
 import com.neusoft.elm.service.UserService;
@@ -14,6 +16,7 @@ public class UserController {
 		User user = service.getUserByIdByPass(userId, password);
 		return user;
 	}
+
 
 	public Object getUserById(HttpServletRequest request) throws Exception {
 		String userId = request.getParameter("userId");
