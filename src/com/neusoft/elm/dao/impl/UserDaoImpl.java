@@ -33,6 +33,30 @@ public class UserDaoImpl implements UserDao {
 				user.setUserSex(rs.getInt("userSex"));
 				user.setUserImg(rs.getString("userImg"));
 				user.setDelTag(rs.getInt("delTag"));
+				user.setPoints(rs.getInt("points"));
+			}
+		} finally {
+			DBUtil.close(rs, pst);
+		}
+		return user;
+	}
+	public User getUserByid(String userId) throws Exception{
+		User user = null;
+		String sql = "select * from user where userId=?";
+		try {
+			con = DBUtil.getConnection();
+			pst = con.prepareStatement(sql);
+			pst.setString(1, userId);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				user = new User();
+				user.setUserId(rs.getString("userId"));
+				user.setPassword(rs.getString("password"));
+				user.setUserName(rs.getString("userName"));
+				user.setUserSex(rs.getInt("userSex"));
+				user.setUserImg(rs.getString("userImg"));
+				user.setDelTag(rs.getInt("delTag"));
+				user.setPoints(rs.getInt("points"));
 			}
 		} finally {
 			DBUtil.close(rs, pst);
@@ -62,7 +86,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int saveUser(User user) throws Exception {
 		int result = 0;
-		String sql = "insert into user values(?,?,?,?,?,1)";
+		String sql = "insert into user values(?,?,?,?,?,1,0)";
 		try {
 			con = DBUtil.getConnection();
 			pst = con.prepareStatement(sql);
@@ -75,6 +99,25 @@ public class UserDaoImpl implements UserDao {
 		} finally {
 			DBUtil.close(rs, pst);
 		}
+		return result;
+	}
+
+	@Override
+	public int updateUser(User user) throws Exception {
+		int result=0;
+		String sql = "update user set password=?,userName=?,userSex=?,points=? where userId=?";
+        try {
+        	con=DBUtil.getConnection();
+        	pst=con.prepareStatement(sql);
+        	pst.setString(1, user.getPassword());
+        	pst.setString(2, user.getUserName());
+        	pst.setInt(3, user.getUserSex());
+        	pst.setString(5,user.getUserId());
+        	pst.setInt(4,user.getPoints());
+        	result=pst.executeUpdate();   	
+        }finally {
+        	DBUtil.close(rs,pst);
+        }
 		return result;
 	}
 }

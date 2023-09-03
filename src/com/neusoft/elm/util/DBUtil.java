@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBUtil {
-	private static final String URL = "jdbc:mysql://localhost:3306/elm?characterEncoding=utf-8&useSSL=false";
+	private static final String URL = "jdbc:mysql://localhost:3306/elm?characterEncoding=utf-8";
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "123456";
