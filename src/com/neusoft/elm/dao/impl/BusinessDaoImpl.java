@@ -69,4 +69,32 @@ public class BusinessDaoImpl implements BusinessDao {
 		}
 		return business;
 	}
+
+	@Override
+	public List<Business> listBusinessByKey(String key) throws Exception {
+		List<Business> list = new ArrayList<>();
+		String sql = "select * from business where businessName like '%"+key+"%' order by businessId";
+		
+		try {
+			con = DBUtil.getConnection();
+			pst = con.prepareStatement(sql);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				Business business = new Business();
+				business.setBusinessId(rs.getInt("businessId"));
+				business.setBusinessName(rs.getString("businessName"));
+				business.setBusinessAddress(rs.getString("businessAddress"));
+				business.setBusinessExplain(rs.getString("businessExplain"));
+				business.setBusinessImg(rs.getString("businessImg"));
+				business.setOrderTypeId(rs.getInt("orderTypeId"));
+				business.setStarPrice(rs.getDouble("starPrice"));
+				business.setDeliveryPrice(rs.getDouble("deliveryPrice"));
+				business.setRemarks(rs.getString("remarks"));
+				list.add(business);
+			}
+		} finally {
+			DBUtil.close(rs, pst);
+		}
+		return list;
+	}
 }

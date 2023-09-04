@@ -3,7 +3,9 @@ package com.neusoft.elm.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import com.neusoft.elm.dao.DeliveryAddressDao;
+import com.neusoft.elm.dao.UserDao;
 import com.neusoft.elm.dao.impl.DeliveryAddressDaoImpl;
+import com.neusoft.elm.dao.impl.UserDaoImpl;
 import com.neusoft.elm.po.DeliveryAddress;
 import com.neusoft.elm.service.DeliveryAddressService;
 import com.neusoft.elm.util.DBUtil;
@@ -27,6 +29,14 @@ public class DeliveryAddressServiceImpl implements DeliveryAddressService {
 	@Override
 	public int saveDeliveryAddress(DeliveryAddress deliveryAddress) {
 		int result = 0;
+		UserDao udao =new UserDaoImpl();
+		try {
+			if(udao.getUserById(deliveryAddress.getUserId())==0)
+				return 0;
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		DeliveryAddressDao dao = new DeliveryAddressDaoImpl();
 		try {
 			DBUtil.getConnection();

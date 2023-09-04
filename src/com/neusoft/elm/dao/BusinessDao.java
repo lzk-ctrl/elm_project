@@ -8,4 +8,5 @@ public interface BusinessDao {
 	public List<Business> listBusinessByOrderTypeId(Integer orderTypeId) throws Exception;
 
 	public Business getBusinessById(Integer businessId) throws Exception;
+	public List<Business> listBusinessByKey(String key) throws Exception;
 }

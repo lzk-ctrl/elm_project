@@ -40,4 +40,17 @@ public class BusinessServiceImpl implements BusinessService {
 		}
 		return business;
 	}
+	public List<Business> listBusinessByKey(String key){
+		List<Business> list=new ArrayList<>();
+		BusinessDao dao=new BusinessDaoImpl();
+		try {
+			DBUtil.getConnection();
+			list = dao.listBusinessByKey(key);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close();
+		}
+		return list;
+	}
 }

@@ -22,4 +22,10 @@ public class BusinessController {
 		Business business = service.getBusinessById(businessId);
 		return business;
 	}
+	public Object listBusinessByKey(HttpServletRequest request)throws Exception{
+		String key=request.getParameter("key");
+		BusinessService service = new BusinessServiceImpl();
+		List<Business> list = service.listBusinessByKey(key);
+		return list;
+	}
 }

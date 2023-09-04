@@ -22,6 +22,7 @@ public class DeliveryAddressController {
 		deliveryAddress.setAddress(request.getParameter("address"));
 		deliveryAddress.setUserId(request.getParameter("userId"));
 		DeliveryAddressService service = new DeliveryAddressServiceImpl();
+		System.out.println(deliveryAddress.getContactName());
 		int result = service.saveDeliveryAddress(deliveryAddress);
 		return result;
 	}
