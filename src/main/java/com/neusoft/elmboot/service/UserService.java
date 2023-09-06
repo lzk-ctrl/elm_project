@@ -13,5 +13,6 @@ public interface UserService {
 	public int updateUserPassword(String userId,String password);
 	public int updateUserName(String userId,String userName);
 	public int updateUserSex(String userId,int userSex);
+	public int getVip(String userId);
 	
 }

@@ -5,10 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.neusoft.elmboot.mapper.BusinessMapper;
 import com.neusoft.elmboot.mapper.CartMapper;
 import com.neusoft.elmboot.mapper.OrderDetailetMapper;
 import com.neusoft.elmboot.mapper.OrdersMapper;
 import com.neusoft.elmboot.mapper.UserMapper;
+import com.neusoft.elmboot.po.Business;
 import com.neusoft.elmboot.po.Cart;
 import com.neusoft.elmboot.po.OrderDetailet;
 import com.neusoft.elmboot.po.Orders;
@@ -23,9 +26,11 @@ public class OrdersServiceImpl implements OrdersService {
 	private CartMapper cartMapper;
 	@Autowired
 	private OrdersMapper ordersMapper;
-	private UserMapper userMapper;
 	@Autowired
 	private OrderDetailetMapper orderDetailetMapper;
+	@Autowired
+	private UserMapper userMapper;
+	private BusinessMapper businessMapper;
 
 	@Override
 	@Transactional
@@ -37,6 +42,10 @@ public class OrdersServiceImpl implements OrdersService {
 		List<Cart> cartList = cartMapper.listCart(cart);
 //2、创建订单（返回生成的订单编号）
 		orders.setOrderDate(CommonUtil.getCurrentDate());
+		double x=orders.getOrderTotal()-Double.valueOf(orders.getPoints())/100.0-5.0*orders.getCount();
+		if(x<0)
+			x=0;
+		orders.setActuallyPay(x);
 		ordersMapper.saveOrders(orders);
 		int orderId = orders.getOrderId();
 
@@ -49,14 +58,12 @@ public class OrdersServiceImpl implements OrdersService {
 			od.setQuantity(c.getQuantity());
 			list.add(od);
 		}
-		double x=orders.getOrderTotal()-Double.valueOf(orders.getPoints())/100.0-5.0*orders.getCount();
-		if(x<0)
-			x=0;
-		orders.setActuallyPay(x);
+		
 		orderDetailetMapper.saveOrderDetailetBatch(list);
 
 //4、从购物车表中删除相关食品信息
 		cartMapper.removeCart(cart);
+		
 
 		return orderId;
 	}
@@ -71,11 +78,16 @@ public class OrdersServiceImpl implements OrdersService {
 		return ordersMapper.listOrdersByUserId(userId);
 	}
 	public int payOrder(Integer orderId) {
-		Orders orders=getOrdersById(orderId);
-		User user=userMapper.getUserByid(orders.getUserId());
-		user.setCount(user.getCount()-orders.getCount());
-		user.setPoints(user.getPoints()-orders.getPoints()+orders.getOrderTotal().intValue());
-		userMapper.updateUser(user);
-		return ordersMapper.payOrder(orderId);
+		Orders orders=ordersMapper.getOrdersById(orderId);
+		try {
+			User user=userMapper.getUserByid(orders.getUserId());
+			user.setCount(user.getCount()-orders.getCount());
+			user.setPoints(user.getPoints()-orders.getPoints()+orders.getOrderTotal().intValue());
+			userMapper.updateUser(user);
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return ordersMapper.payOrder(orders);
 	}
 }

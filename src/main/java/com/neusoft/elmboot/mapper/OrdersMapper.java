@@ -20,5 +20,5 @@ public interface OrdersMapper {
 	public List<Orders> listOrdersByUserId(String userId);
 	
 	@Update("update orders set orderState=1 where orderId=#{orderId}")
-	public int payOrder(Integer orderId);
+	public int payOrder(Orders orders);
 }

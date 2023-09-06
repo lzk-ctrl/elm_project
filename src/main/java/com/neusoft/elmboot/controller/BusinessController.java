@@ -27,4 +27,8 @@ public class BusinessController {
 	public List<Business> listBusinessByKey(Business business) throws Exception{
 		return businessService.listBusinessByKey(business.getBusinessName());
 	}
+	@RequestMapping("/listBusinessByRankkDescending")
+	public List<Business> listBusinessByRankkDescending(Business business) throws Exception{
+		return businessService.listBusinessByRankkDescending();
+	}
 }

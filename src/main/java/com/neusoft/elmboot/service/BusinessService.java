@@ -8,4 +8,5 @@ public interface BusinessService {
 
 	public Business getBusinessById(Integer businessId);
 	public List<Business> listBusinessByKey(String businessName);
+ 	public List<Business> listBusinessByRankkDescending();
 }

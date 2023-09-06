@@ -10,6 +10,15 @@ public class Business {
 	private double starPrice; // 起送费
 	private double deliveryPrice; // 配送费
 	private String remarks;
+	private Integer rankk;
+
+	public Integer getRankk() {
+		return rankk;
+	}
+
+	public void setRankk(Integer rankk) {
+		this.rankk = rankk;
+	}
 
 	public Integer getBusinessId() {
 		return businessId;

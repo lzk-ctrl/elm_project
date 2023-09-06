@@ -28,4 +28,7 @@ public class BusinessServiceImpl implements BusinessService {
 		businessName ="%"+businessName+"%";
 		return businessMapper.listBusinessByKey(businessName);
 	}
+	public List<Business> listBusinessByRankkDescending(){
+		return businessMapper.listBusinessByRankkDescending();
+	}
 }

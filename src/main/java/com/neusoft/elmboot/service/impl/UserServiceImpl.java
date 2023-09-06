@@ -47,4 +47,11 @@ public class UserServiceImpl implements UserService {
 		result=userMapper.updateUser(user);
 		return result; 
 	}
+	public int getVip(String userId) {
+		int result=0;
+		User user=userMapper.getUserByid(userId);
+		user.setCount(user.getCount()+5);
+		result=userMapper.updateUser(user);
+		return result;
+	}
 }

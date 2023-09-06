@@ -36,8 +36,9 @@ public class UserController {
 	public int updateUserName(User user) throws Exception {
 		return userService.updateUserName(user.getUserId(),user.getUserName());
 	}
-	@RequestMapping("/updateUserSex")
-	public int updateUserSex(User user) throws Exception {
-		return userService.updateUserSex(user.getUserId(),user.getUserSex());
+	@RequestMapping("/getVip")
+	public int getVip(User user) throws Exception {
+		return userService.getVip(user.getUserId());
 	}
+	
 }
