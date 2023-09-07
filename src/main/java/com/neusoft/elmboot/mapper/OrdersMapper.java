@@ -21,4 +21,6 @@ public interface OrdersMapper {
 	
 	@Update("update orders set orderState=1 where orderId=#{orderId}")
 	public int payOrder(Orders orders);
+	@Update("update orders set count=#{count},points=#{points},actuallyPay=#{actuallyPay} where orderId=#{orderId}")
+	public int updateOrder(Orders orders);
 }

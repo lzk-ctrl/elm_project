@@ -10,4 +10,5 @@ public interface OrdersService {
 
 	public List<Orders> listOrdersByUserId(String userId);
 	public int payOrder(Integer orderId);
+	public int updatePoints(Integer orderId,Integer points,Integer count);
 }

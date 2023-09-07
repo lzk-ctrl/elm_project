@@ -42,10 +42,7 @@ public class OrdersServiceImpl implements OrdersService {
 		List<Cart> cartList = cartMapper.listCart(cart);
 //2、创建订单（返回生成的订单编号）
 		orders.setOrderDate(CommonUtil.getCurrentDate());
-		double x=orders.getOrderTotal()-Double.valueOf(orders.getPoints())/100.0-5.0*orders.getCount();
-		if(x<0)
-			x=0;
-		orders.setActuallyPay(x);
+		orders.setActuallyPay(orders.getOrderTotal());
 		ordersMapper.saveOrders(orders);
 		int orderId = orders.getOrderId();
 
@@ -89,5 +86,15 @@ public class OrdersServiceImpl implements OrdersService {
 			e.printStackTrace();
 		}
 		return ordersMapper.payOrder(orders);
+	}
+	public int updatePoints(Integer orderId,Integer points,Integer count) {
+		Orders order=ordersMapper.getOrdersById(orderId);
+		order.setCount(count);
+		order.setPoints(points);
+		double x=order.getOrderTotal()-Double.valueOf(order.getPoints())/100.0-5.0*order.getCount();
+		if(x<0)
+			x=0;
+		order.setActuallyPay(x);
+		return ordersMapper.updateOrder(order);
 	}
 }

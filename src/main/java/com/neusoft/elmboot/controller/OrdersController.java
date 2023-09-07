@@ -31,5 +31,9 @@ public class OrdersController {
 	public int payOrder(Orders orders) throws Exception{
 		return ordersService.payOrder(orders.getOrderId());
 	}
+	@RequestMapping("/updatePoints")
+	public int updatePoints(Orders orders) throws Exception{
+		return ordersService.updatePoints(orders.getOrderId(),orders.getPoints(),orders.getCount());
+	}
 	
 }
