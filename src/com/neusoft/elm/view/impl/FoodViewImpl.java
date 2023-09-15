@@ -3,19 +3,19 @@ package com.neusoft.elm.view.impl;
 import java.util.List;
 import java.util.Scanner;
 
-import com.neusoft.elm.dao.FoodDao;
-import com.neusoft.elm.dao.impl.FoodDaoImpl;
-import com.neusoft.elm.po.Food;
+import com.neusoft.elm.dao.FoodDaoo;
+import com.neusoft.elm.dao.impl.FoodDaooImpl;
+import com.neusoft.elm.po.Foodd;
 import com.neusoft.elm.view.FoodView;
 
 public class FoodViewImpl implements FoodView {
 	private Scanner input = new Scanner(System.in);
 
-	public List<Food> showFoodList(Integer businessId) {
-		FoodDao dao = new FoodDaoImpl();
-		List<Food> list = dao.listFoodByBusinessId(businessId);
+	public List<Foodd> showFoodList(Integer businessId) {
+		FoodDaoo dao = new FoodDaooImpl();
+		List<Foodd> list = dao.listFoodByBusinessId(businessId);
 		System.out.println("食品编号\t食品名称\t食品介绍\t食品价格");
-		for (Food food : list) {
+		for (Foodd food : list) {
 			System.out.println(food.getFoodId() + "\t" + food.getFoodName() + "\t" + food.getFoodExplain() + "\t"
 					+ food.getFoodPrice());
 		}
@@ -24,7 +24,7 @@ public class FoodViewImpl implements FoodView {
 
 	@Override
 	public void saveFood(Integer businessId) {
-		Food food = new Food();
+		Foodd food = new Foodd();
 		System.out.println("请输入食品名称：");
 		food.setFoodName(input.next());
 		System.out.println("请输入食品介绍：");
@@ -32,7 +32,7 @@ public class FoodViewImpl implements FoodView {
 		System.out.println("请输入食品价格：");
 		food.setFoodPrice(input.nextDouble());
 		food.setBusinessId(businessId);
-		FoodDao dao = new FoodDaoImpl();
+		FoodDaoo dao = new FoodDaooImpl();
 		int result = dao.saveFood(food);
 		if (result > 0) {
 			System.out.println("\n新增食品成功！\n");
@@ -44,15 +44,15 @@ public class FoodViewImpl implements FoodView {
 
 	@Override
 	public void updateFood(Integer businessId) {
-		FoodDao dao = new FoodDaoImpl();
-		List<Food> list = showFoodList(businessId);
+		FoodDaoo dao = new FoodDaooImpl();
+		List<Foodd> list = showFoodList(businessId);
 		if (list.size() == 0) {
 			System.out.println("没有任何食品!!!");
 			return;
 		}
 		System.out.println("请选择要更新的食品编号：");
 		int foodId = input.nextInt();
-		Food food = dao.getFoodById(foodId);
+		Foodd food = dao.getFoodById(foodId);
 		System.out.println(food);
 
 		String inputStr = "";
@@ -87,8 +87,8 @@ public class FoodViewImpl implements FoodView {
 
 	@Override
 	public void removeFood(Integer businessId) {
-		FoodDao dao = new FoodDaoImpl();
-		List<Food> list = showFoodList(businessId);
+		FoodDaoo dao = new FoodDaooImpl();
+		List<Foodd> list = showFoodList(businessId);
 		if (list.size() == 0) {
 			System.out.println("没有任何食品！");
 			return;

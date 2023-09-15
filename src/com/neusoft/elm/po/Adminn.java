@@ -1,6 +1,6 @@
 package com.neusoft.elm.po;
 
-public class Admin {
+public class Adminn {
 	private Integer adminId;
 	 private String adminName;
 	 private String password;

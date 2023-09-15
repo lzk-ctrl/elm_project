@@ -7,18 +7,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.neusoft.elm.dao.BusinessDao;
-import com.neusoft.elm.po.Business;
-import com.neusoft.elm.util.DBUtil;
+import com.neusoft.elm.dao.BusinessDaoo;
+import com.neusoft.elm.po.Businesss;
+import com.neusoft.elm.util.DBUtill;
 
-public class BusinessDaoImpl implements BusinessDao {
+public class BusinessDaooImpl implements BusinessDaoo {
 
 	private Connection con = null;
 	private PreparedStatement pst = null;
 	private ResultSet rs = null;
 
-	public List<Business> listBusiness(String businessName, String businessAddress) {
-		List<Business> list = new ArrayList<>();
+	public List<Businesss> listBusiness(String businessName, String businessAddress) {
+		List<Businesss> list = new ArrayList<>();
 		StringBuffer sql = new StringBuffer("select * from business where 1=1");
 		if (businessName != null && !businessName.equals("")) {
 			sql.append(" and businessName like '%" + businessName + "%'");
@@ -27,11 +27,11 @@ public class BusinessDaoImpl implements BusinessDao {
 			sql.append(" and businessAddress like '%" + businessAddress + "%' ");
 		}
 		try {
-			con = DBUtil.getConnection();
+			con = DBUtill.getConnection();
 			pst = con.prepareStatement(sql.toString());
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				Business business = new Business();
+				Businesss business = new Businesss();
 				business.setBusinessId(rs.getInt("businessId"));
 				business.setPassword(rs.getString("password"));
 				business.setBusinessName(rs.getString("businessName"));
@@ -44,7 +44,7 @@ public class BusinessDaoImpl implements BusinessDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtil.close(rs, pst, con);
+			DBUtill.close(rs, pst, con);
 		}
 		return list;
 	}
@@ -53,7 +53,7 @@ public class BusinessDaoImpl implements BusinessDao {
 		int businessId = 0;
 		String sql = "insert into business(businessName,password) values(?,'123')";
 		try {
-			con = DBUtil.getConnection();
+			con = DBUtill.getConnection();
 			pst = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 			pst.setString(1, businessName);
 			pst.executeUpdate();
@@ -64,7 +64,7 @@ public class BusinessDaoImpl implements BusinessDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtil.close(rs, pst, con);
+			DBUtill.close(rs, pst, con);
 		}
 		return businessId;
 	}
@@ -75,7 +75,7 @@ public class BusinessDaoImpl implements BusinessDao {
 		String delFootSql = "delete from food where businessId =?";
 		String delBusinessSql = "delete from business where businessId=?";
 		try {
-			con = DBUtil.getConnection();
+			con = DBUtill.getConnection();
 			pst = con.prepareStatement(delFootSql);
 			pst.setInt(1, businessId);
 			pst.executeUpdate();
@@ -83,31 +83,31 @@ public class BusinessDaoImpl implements BusinessDao {
 			pst.setInt(1, businessId);
 			result = pst.executeUpdate();
 		} catch (SQLException e) {
-			result = 0;// ·¢ËÍÒì³£
+			result = 0;// ï¿½ï¿½ï¿½ï¿½ï¿½ì³£
 			try {
-				con.rollback();// ±£Ö¤²Ù×÷µÄÔ­×ÓÐÔ£¬Á½¸ösql
+				con.rollback();// ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½Ô£ï¿½ï¿½ï¿½ï¿½ï¿½sql
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
 		} finally {
-			DBUtil.close(null, pst, con);
+			DBUtill.close(null, pst, con);
 		}
 		return result;
 	}
 
 	@Override
-	public Business getBusinessByIdByPass(Integer businessId, String password) {
-		Business business = null;
+	public Businesss getBusinessByIdByPass(Integer businessId, String password) {
+		Businesss business = null;
 		String sql = "select * from business where businessId=? and password=?";
 		try {
-			con = DBUtil.getConnection();
+			con = DBUtill.getConnection();
 			pst = con.prepareStatement(sql);
 			pst.setInt(1, businessId);
 			pst.setString(2, password);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				business = new Business();
+				business = new Businesss();
 				business.setBusinessId(rs.getInt("businessId"));
 				business.setPassword(rs.getString("password"));
 				business.setBusinessName(rs.getString("businessName"));
@@ -119,22 +119,22 @@ public class BusinessDaoImpl implements BusinessDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtil.close(rs, pst, con);
+			DBUtill.close(rs, pst, con);
 		}
 		return business;
 	}
 
 	@Override
-	public Business getBusinessById(Integer businessId) {
-		Business business=null;
+	public Businesss getBusinessById(Integer businessId) {
+		Businesss business=null;
 		String sql="select * from business where businessId=?";
 		try {
-			con=DBUtil.getConnection();
+			con=DBUtill.getConnection();
 			pst=con.prepareStatement(sql);
 			pst.setInt(1, businessId);
 			rs=pst.executeQuery();
 			while(rs.next()) {
-				business=new Business();
+				business=new Businesss();
 				business.setBusinessId(rs.getInt("businessId"));
 				business.setPassword(rs.getString("password"));
 				business.setBusinessName(rs.getString("businessName"));
@@ -146,17 +146,17 @@ public class BusinessDaoImpl implements BusinessDao {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
-			DBUtil.close(rs, pst, con);
+			DBUtill.close(rs, pst, con);
 		}
 		return business;
 	}
 
 	@Override
-	public int updateBusiness(Business business) {
+	public int updateBusiness(Businesss business) {
 		int result =0;
 		String sql="update business set businessName=?,businessAddress=?,businessExplain=?,starPrice=?,deliveryPrice=? where \r\n" + "businessId=?";
 		try {
-			con=DBUtil.getConnection();
+			con=DBUtill.getConnection();
 			pst=con.prepareStatement(sql);
 			pst.setString(1, business.getBusinessName());
 			 pst.setString(2, business.getBusinessAddress());
@@ -168,7 +168,7 @@ public class BusinessDaoImpl implements BusinessDao {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			DBUtil.close(null, pst, con);
+			DBUtill.close(null, pst, con);
 		}
 		return result;
 	}
@@ -178,7 +178,7 @@ public class BusinessDaoImpl implements BusinessDao {
 		int result=0;
 		String sql="update business set password=? where businessId=?";
 		try {
-			con=DBUtil.getConnection();
+			con=DBUtill.getConnection();
 			pst=con.prepareStatement(sql);
 			pst.setString(1, password);
 			pst.setInt(2, businessId);
@@ -186,7 +186,7 @@ public class BusinessDaoImpl implements BusinessDao {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			DBUtil.close(null, pst, con);
+			DBUtill.close(null, pst, con);
 		}
 		return result;
 	}

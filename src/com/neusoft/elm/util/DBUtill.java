@@ -6,13 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DBUtil {
-	private static final String URL ="jdbc:mysql://localhost:3306/elm_admin?characterEncoding=utf-8";//Êý¾Ý¿âÁ¬½Ó×Ö·û´®
+public class DBUtill {
+	private static final String URL ="jdbc:mysql://localhost:3306/elm_admin?characterEncoding=utf-8";//ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
 	private static final String DRIVER ="com.mysql.cj.jdbc.Driver";
 	private static final String USERNAME ="root";
 	private static final String PASSWORD ="123456";
 	
-	//»ñÈ¡connection
+	//ï¿½ï¿½È¡connection
 	public static Connection getConnection(){
 		Connection con=null;
 		try {
@@ -24,7 +24,7 @@ public class DBUtil {
 		}
 		return con;
 	}
-	//¹Ø±Õ×ÊÔ´
+	//ï¿½Ø±ï¿½ï¿½ï¿½Ô´
 	public static void close(ResultSet rs,PreparedStatement pst,Connection con) {
 		if(rs!=null) {
 			try {

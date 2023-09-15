@@ -2,7 +2,7 @@ package com.neusoft.elm;
 
 import java.util.Scanner;
 
-import com.neusoft.elm.po.Admin;
+import com.neusoft.elm.po.Adminn;
 import com.neusoft.elm.view.AdminView;
 import com.neusoft.elm.view.BusinessView;
 import com.neusoft.elm.view.impl.AdminViewImpl;
@@ -17,7 +17,7 @@ public class ElmAdminEntry {
 		System.out.println("-----------------------------------------------------------------");
 		AdminView adminView = new AdminViewImpl();
 		BusinessView businessView = new BusinessViewImpl();
-		Admin admin = adminView.login();
+		Adminn admin = adminView.login();
 
 		Scanner input = new Scanner(System.in);
 		if (admin != null) {

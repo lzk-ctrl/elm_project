@@ -3,19 +3,19 @@ package com.neusoft.elm.view.impl;
 import java.util.List;
 import java.util.Scanner;
 
-import com.neusoft.elm.dao.BusinessDao;
-import com.neusoft.elm.dao.impl.BusinessDaoImpl;
-import com.neusoft.elm.po.Business;
+import com.neusoft.elm.dao.BusinessDaoo;
+import com.neusoft.elm.dao.impl.BusinessDaooImpl;
+import com.neusoft.elm.po.Businesss;
 import com.neusoft.elm.view.BusinessView;
 
 public class BusinessViewImpl implements BusinessView {
 	private Scanner input = new Scanner(System.in);
 
 	public void listBusinessAll() {
-		BusinessDao dao = new BusinessDaoImpl();
-		List<Business> list = dao.listBusiness(null, null);
+		BusinessDaoo dao = new BusinessDaooImpl();
+		List<Businesss> list = dao.listBusiness(null, null);
 		System.out.println("商家编号\t商家名称\t商家地址\t商家介绍\t起送费\t配送费");
-		for (Business b : list) {
+		for (Businesss b : list) {
 			System.out.println(b.getBusinessId() + "\t" + b.getBusinessName() + "\t" + b.getBusinessAddress() + "\t"
 					+ b.getBusinessExplain() + "\t" + b.getStarPrice() + "\t" + b.getDeliveryPrice());
 		}
@@ -23,7 +23,7 @@ public class BusinessViewImpl implements BusinessView {
 
 	@Override
 	public void listBusiness() {
-		BusinessDao dao = new BusinessDaoImpl();
+		BusinessDaoo dao = new BusinessDaooImpl();
 		String inputStr = "";
 		String businessName = "";
 		String businessAddress = "";
@@ -41,9 +41,9 @@ public class BusinessViewImpl implements BusinessView {
 			businessAddress = input.next();
 		}
 
-		List<Business> list = dao.listBusiness(businessName, businessAddress);
+		List<Businesss> list = dao.listBusiness(businessName, businessAddress);
 		System.out.println("商家编号\t商家名称\t商家地址\t商家介绍\t起送费\t配送费");
-		for (Business b : list) {
+		for (Businesss b : list) {
 			System.out.println(b.getBusinessId() + "\t" + b.getBusinessName() + "\t" + b.getBusinessAddress() + "\t"
 					+ b.getBusinessExplain() + "\t" + b.getStarPrice() + "\t" + b.getDeliveryPrice());
 		}
@@ -53,7 +53,7 @@ public class BusinessViewImpl implements BusinessView {
 	public void saveBusiness() {
 		System.out.println("请输入商家名称：");
 		String businessName = input.next();
-		BusinessDao dao = new BusinessDaoImpl();
+		BusinessDaoo dao = new BusinessDaooImpl();
 		int businessId = dao.saveBusiness(businessName);
 		if (businessId > 0) {
 			System.out.println("新建商家成功！商家编号为：" + businessId);
@@ -65,7 +65,7 @@ public class BusinessViewImpl implements BusinessView {
 	public void removeBusiness() {
 		System.out.println("请输入商家编号：");
 		int businessId = input.nextInt();
-		BusinessDao dao = new BusinessDaoImpl();
+		BusinessDaoo dao = new BusinessDaooImpl();
 		System.out.println("确认要删除吗(y/n)：");
 		if (input.next().equals("y")) {
 			int result = dao.removeBusiness(businessId);
@@ -80,26 +80,26 @@ public class BusinessViewImpl implements BusinessView {
 	}
 
 	@Override
-	public Business login() {
+	public Businesss login() {
 		System.out.println("请输入商家编号：");
 		int businessId = input.nextInt();
 		System.out.println("请输入密码：");
 		String password = input.next();
-		BusinessDao dao = new BusinessDaoImpl();
+		BusinessDaoo dao = new BusinessDaooImpl();
 		return dao.getBusinessByIdByPass(businessId, password);
 	}
 
 	public void showBusiness(Integer businessId) {
-		BusinessDao dao = new BusinessDaoImpl();
-		Business business = dao.getBusinessById(businessId);
+		BusinessDaoo dao = new BusinessDaooImpl();
+		Businesss business = dao.getBusinessById(businessId);
 		System.out.println(business);
 	}
 
 	@Override
 	public void editBusiness(Integer businessId) {
 		// 先将商家信息查询出来显示，然后用户才能更新
-		BusinessDao dao = new BusinessDaoImpl();
-		Business business = dao.getBusinessById(businessId);
+		BusinessDaoo dao = new BusinessDaooImpl();
+		Businesss business = dao.getBusinessById(businessId);
 		System.out.println(business);
 
 		String inputStr = "";
@@ -148,8 +148,8 @@ public class BusinessViewImpl implements BusinessView {
 
 	@Override
 	public void changePassword(Integer businessId) {
-		BusinessDao dao = new BusinessDaoImpl();
-		Business business = dao.getBusinessById(businessId);
+		BusinessDaoo dao = new BusinessDaooImpl();
+		Businesss business = dao.getBusinessById(businessId);
 		System.out.println("\n请输入旧密码：");
 		String oldPass = input.next();
 		while (!oldPass.equals(business.getPassword())) {

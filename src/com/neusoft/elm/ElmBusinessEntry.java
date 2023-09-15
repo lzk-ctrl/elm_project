@@ -2,7 +2,7 @@ package com.neusoft.elm;
 
 import java.util.Scanner;
 
-import com.neusoft.elm.po.Business;
+import com.neusoft.elm.po.Businesss;
 import com.neusoft.elm.view.BusinessView;
 import com.neusoft.elm.view.FoodView;
 import com.neusoft.elm.view.impl.BusinessViewImpl;
@@ -15,7 +15,7 @@ public class ElmBusinessEntry {
 		System.out.println("|\t\t\t 饿了么后台管理系统 \t\t\t|");
 		System.out.println("-----------------------------------------------------------------");
 	    BusinessView businessView= new BusinessViewImpl();
-	    Business business=businessView.login();
+	    Businesss business=businessView.login();
 	    if(business!=null) {
 	    	int menu=0;
 	    	while(menu!=5) {

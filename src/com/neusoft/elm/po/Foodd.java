@@ -1,6 +1,6 @@
 package com.neusoft.elm.po;
 
-public class Food {
+public class Foodd {
 	private Integer foodId;
 	private String foodName;
 	private String foodExplain;

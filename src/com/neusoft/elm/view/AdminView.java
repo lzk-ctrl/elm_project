@@ -1,7 +1,7 @@
 package com.neusoft.elm.view;
 
-import com.neusoft.elm.po.Admin;
+import com.neusoft.elm.po.Adminn;
 
 public interface AdminView {
-	public Admin login();
+	public Adminn login();
 }

@@ -1,6 +1,6 @@
 package com.neusoft.elm.po;
 
-public class Business {
+public class Businesss {
 	private Integer businessId;
 	private String password;
 	private String businessName;
