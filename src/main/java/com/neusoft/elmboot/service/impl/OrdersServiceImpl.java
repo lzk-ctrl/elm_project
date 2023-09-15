@@ -90,6 +90,9 @@ public class OrdersServiceImpl implements OrdersService {
 	public int updatePoints(Integer orderId,Integer points,Integer count) {
 		Orders order=ordersMapper.getOrdersById(orderId);
 		order.setCount(count);
+		if(order.getCount()>1)
+			order.setCount(1);
+		System.out.println("+++++++++++++++++++++++"+count+"++++++++++++++++++++++++++++++++++");
 		order.setPoints(points);
 		double x=order.getOrderTotal()-Double.valueOf(order.getPoints())/100.0-5.0*order.getCount();
 		if(x<0)
